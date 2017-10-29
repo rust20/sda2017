@@ -1,0 +1,24 @@
+import java.io.*;
+
+public class SDA1718L1B_Jumat{
+	public static void main(String [] args){
+		// BufferedReader input = new BufferedReader(
+				// new InputStreamReader(System.in));
+		// BufferedWriter output = new BufferedWriter(
+				// new OutputStreamWriter(System.out));
+		String [] firstLine = input.readLine().split(" ");
+		String [] secondLine = input.readLine().split(" ");
+		int n = Integer.valueOf(firstLine[0]);
+		long k = Integer.valueOf(firstLine[1]);
+		long count = 0;
+		int [] arr1 = new int[n];
+		int [] arr2 = new int[n];
+		for(int i = 0; i < n; i++){
+			long temp = Long.valueOf(secondLine[i]) % k;
+			arr[temp]++;
+		}
+
+
+		output.write(String.valueOf(count));
+	}
+}
