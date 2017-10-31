@@ -1,0 +1,29 @@
+ADD;Maria Florence
+ADD;Daisy MacBean
+ADD;Sarah Clay
+ADD;Ange le Carre
+ADD;Charlotte
+ADD;Elizabeth Cassandra Austin
+ADD;Chise Todo
+ADD;Shirley Collins
+ADD;Jane McLean
+ADD;Beatrice
+ADD;Meifan Zhu
+ADD;Elena Clay
+ADD;Alicia
+ADD;Ange le Carre
+ADD;Chise Todo
+ADD;Beatrice
+ADD;Daisy MacBean
+ADD;Charlotte
+CONTAINS;Charlotte
+CONTAINS;Sophie Mackenzie
+REMOVE;Alicia
+REMOVE;Ange le Carre
+REMOVE;Daisy MacBean
+MAX
+MIN
+PREORDER
+POSTORDER
+ASCENDING
+DESCENDING

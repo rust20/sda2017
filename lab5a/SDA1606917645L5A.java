@@ -7,348 +7,280 @@ import java.util.List;
 import java.util.LinkedList;
 
 public class SDA1606917645L5A {
+	static BufferedReader scan = new BufferedReader(new InputStreamReader(System.in));
+	static PrintWriter print = new PrintWriter(new OutputStreamWriter(System.out));
 	public static void main (String[] args) throws IOException {
-		BufferedReader scan = new BufferedReader(new InputStreamReader(System.in));
-		PrintWriter print = new PrintWriter(new OutputStreamWriter(System.out));
 
 		String [] inputs;
 		String tmpInput = null;
 
+		Tree<String> tree = new Tree<>();
+
 		while((tmpInput = scan.readLine()) != null){
 			inputs = tmpInput.split(";");
+			boolean status;
+			List<String> list = null; if (inputs.length < 1) continue;
 			switch(inputs[0]){
 				case "ADD":
+					status = tree.add(inputs[1]);
+					if (status){
+						print.println(inputs[1] + " berhasil ditambahkan ke dalam tree");
+					} else {
+						print.println(inputs[1] + " sudah dimasukkan sebelumnya");
+					}
 					break;
 				case "REMOVE":
+					status = tree.remove(inputs[1]);
+					if (status){
+						print.println(inputs[1] + " berhasil dihapus dari tree");
+					} else {
+						print.println(inputs[1] + " tidak ditemukan");
+					}
 					break;
 				case "CONTAINS":
+					status = tree.contains(inputs[1]);
+					if (status){
+						print.println(inputs[1] + " terdapat pada tree");
+					} else {
+						print.println(inputs[1] + " tidak terdapat pada tree");
+					}
 					break;
 				case "PREORDER":
+					list = tree.preOrder();
+					if (list != null)
+						print.println(printList(list));
+					else
+						print.println("Tidak ada elemen pada tree");
 					break;
 				case "POSTORDER":
+					list = tree.postOrder();
+					if (list != null)
+						print.println(printList(list));
+					else
+						print.println("Tidak ada elemen pada tree");
 					break;
 				case "ASCENDING":
+					list = tree.inOrderAscending();
+					if (list != null)
+						print.println(printList(list));
+					else
+						print.println("Tidak ada elemen pada tree");
 					break;
 				case "DESCENDING":
+					list = tree.inOrderDescending();
+					if (list != null)
+						print.println(printList(list));
+					else
+						print.println("Tidak ada elemen pada tree");
 					break;
 				case "MAX":
+					if (tree.max() != null)
+						print.println(tree.max() + " merupakan elemen dengan nilai tertinggi");
+					else
+						print.println("Tidak ada elemen pada tree");
 					break;
 				case "MIN":
+					if (tree.max() != null)
+						print.println(tree.min() +  " merupakan elemen dengan nilai terendah");
+					else
+						print.println("Tidak ada elemen pada tree");
 					break;
 			}
+			print.flush();
 		}
+		// print.flush();
+	}
+
+	public static String printList(List<String> list){
+		String res = "";
+		for(int i = 0; i < list.size()-1; i++){
+			res += list.get(i) + ";";
+		}
+		res += list.get(list.size()-1);
+		return res;
 	}
 }
 
-/**
- *
- * Kelas Binary Search Tree
- * Mahasiswa tidak diwajibkan menggunakan template ini, namun sangat disarankan menggunakan template ini
- * Pada template ini, diasumsikan kelas yang ingin dipakai mengimplementasikan (implements) interface Comparable
- * NOTE : Tidak semua method yang dibutuhkan sudah disediakan templatenya pada kelas ini sehingga mahasiswa harus menambahkan sendiri method yang dianggap perlu
- * @author Jahns Christian Albert
- *
-*/
-class BSTree<E extends Comparable<E>> {
 
-	/**
-	  *
-	  * Kelas yang merepresentasikan node pada tree
-	  * @author Jahns Christian Albert
-	  *
-	*/
-	private static class Node<E> {
-
-		E elem;
-		Node<E> left;
-		Node<E> right;
-		Node<E> parent;
-
-		/**
-		 *
-		 * Constructor
-		 * @param elemen pada node
-		 * @param node kiri
-		 * @param node kanan
-		 * @param node parent
-		 *
-		*/
-		public Node(E elem, Node<E> left, Node<E> right, Node<E> parent){
-			this.elem = elem;
-			this.left = left;
-			this.right = right;
-			this.parent = parent;
-		}
-	}
+class Tree<E extends Comparable<E>>{
 
 	private Node<E> root;
-
-
-	/**
-	  *
-	  * Constructor Kelas Binary Search Tree
-	  *
-	*/
-	public BSTree(){
+	public Tree(){
 		root = null;
 	}
-
-	/**
-	  *
-	  * Mengetahui apakah tree kosong atau tidak
-	  * @return true jika kosong, false jika sebaliknya
-	  *
-	*/
 	public boolean isEmpty(){
 		return root == null;
 	}
 
-	/**
-	  *
-	  * Menambahkan objek ke dalam tree
-	  * @param elemen yang ingin ditambahkan
-	  * @return true jika elemen berhasil ditambahkan, false jika elemen sudah terdapat pada tree
-	  *
-	*/
 	public boolean add(E elem){
-		boolean res = true;
-		if(root == null){
-			// TO DO : Lengkapi bagian ini
-			root = new Node<>(elem, null, null, null);
+		if (root == null) {
+			root = new Node<>(elem , null, null);
+			return true;
 		} else {
-			// Node<E> prev = null;
-			Node<E> current = root;
-			while(current != null){
-				E currElem = current.elem;
-				if(elem.compareTo(currElem) < 0){
-					// TO DO : Lengkapi bagian ini
-					current = current.left;
-				} else if(elem.compareTo(currElem) > 0){
-					// TO DO : Lengkapi bagian ini
-					current = current.right;
-				} else {
-					// TO DO : Lengkapi bagian ini
-					res = false;
-					break;
-				}
-			}
-			// TO DO : Lengkapi bagian ini
+			return add(elem, root, null);
 		}
-		return res;
 	}
 
-	/**
-	  *
-	  * Mendapatkan node dengan elemen tertentu
-	  * @param elemen yang ingin dicari nodenya
-	  * @return node dari elemen pada parameter, null jika tidak ditemukan
-	  *
-	*/
-	private Node<E> find(E elem){
-		Node<E> res = null;
-		if(root != null){
-			Node<E> current = root;
-			boolean found = false;
-			while(!found && current != null){
-				E currElem = current.elem;
-				if(elem.compareTo(currElem) < 0){
-					// TO DO : Lengkapi bagian ini
-					current = current.left;
-				} else if(elem.compareTo(currElem) > 0){
-					// TO DO : Lengkapi bagian ini
-					current = current.right;
-				} else {
-					// TO DO : Lengkapi bagian ini
-					res = current;
-				}
-			}
-		}
-		return res;
-	}
-
-	/**
-	 *
-	 * Menghapus objek dari tree, menggunakan successor inorder untuk menghapus elemen yang memiliki left node dan right node
-	 * Manfaatkan method minNode(Node<E> node) untuk mencari successor inorder
-	 * @param elemen yang ingin dihapus
-	 * @return true jika elemen ditemukan dan berhasil dihapus, false jika elemen tidak ditemukan
-	 *
-	*/
-	public boolean remove2(E elem){
-		boolean res = false;
-		Node<E> node = find(elem);
-		if(node != null){
-			if(node.left == null){
-				if(node.right == null){ } else { }
-			} else {
-				if(node.right == null){ } else { }
-			}
-			res = true;
-		}
-		return res;
-	}
+	public boolean add(E elem, Node<E> current, Node<E> prev){
+		if (current == null) {
+			if (elem.compareTo(prev.elem) < 0)
+				prev.left = new Node<>(elem, null, null);
+			else
+				prev.right = new Node<>(elem, null, null);
+			return true;
+		} else if (elem.compareTo(current.elem) < 0){
+			return add(elem, current.left, current);
+		} else if (elem.compareTo(current.elem) > 0){
+			return add(elem, current.right, current);
+		} else {
+			return false;
+		} }
 
 	public boolean remove(E elem){
-
-		return res;
+		if (root == null) {
+			return false;
+		} else {
+			return remove(elem, root, null);
+		}
 	}
 
+	private boolean remove(E elem, Node<E> current, Node<E> prev){
+		if (current == null){
+			return false;
+		} else if (elem.compareTo(current.elem) < 0){
+			return remove(elem, current.left, current);
+		} else if (elem.compareTo(current.elem) > 0){
+			return remove(elem, current.right, current);
+		} else {
+			if (current.elem.compareTo(root.elem) == 0){
+				Node<E> tempNode = minNode(current.right, null);
+				remove(minNode(current.right, null).elem);
+				root.elem = tempNode.elem;
+			} else if (current.left == null && current.right == null){
+				if(elem.compareTo(prev.elem) < 0)
+					prev.left = null;
+				else
+					prev.right = null;
+			} else if (current.left == null || current.right == null){
+				if(elem.compareTo(prev.elem) < 0) {
+					prev.left = (current.left != null)?current.left:current.right;
+				} else {
+					prev.right = (current.left != null)?current.left:current.right;
+				}
+			} else {
+				Node<E> tempNode = minNode(current.right, null);
+				remove(minNode(current.right, null).elem);
+				if(elem.compareTo(prev.elem) < 0) {
+					prev.left.elem = tempNode.elem;
+				} else {
+					prev.right.elem = tempNode.elem;
+				}
+			}
+			return true;
+		}
+	}
 
-	/**
-	 *
-	 * Mencari elemen dengan nilai paling kecil pada tree
-	 * @return elemen dengan nilai paling kecil pada tree
-	 *
-	*/
+	// public void removeMin (Node<E> current, Node<E> prev){
+		// if (current == null) prev.left = null;
+		// else removeMin(current.left, current);
+	// }
+
 	public E min(){
-		return minNode(root).elem;
+		if (root == null) return null;
+		return minNode(root, null).elem;
 	}
-
-	/**
-	  *
-	  * Method untuk mengembalikan node dengan elemen terkecil pada suatu subtree
-	  * Hint : Manfaatkan struktur dari binary search tree
-	  * @param node root dari subtree yang ingin dicari elemen terbesarnya
-	  * @return node dengan elemen terkecil dari subtree yang diinginkan
-	  *
-	*/
-	private Node<E> minNode(Node<E> node){
-		Node<E> res = null;
-		if(node != null){
-			Node<E> current = node;
-			// TO DO : Lengkapi bagian ini
-		}
-		return res;
+	private Node<E> minNode(Node<E> current, Node<E> prev){
+		if (current == null) return prev;
+		else return minNode(current.left, current);
 	}
-
-	/**
-	 *
-	 * Mencari elemen dengan nilai paling besar pada tree
-	 * @return elemen dengan nilai paling besar pada tree
-	 *
-	*/
 	public E max(){
-		return maxNode(root).elem;
+		if (root == null) return null;
+		return maxNode(root, null).elem;
 	}
-
-	/**
-	  *
-	  * Method untuk mengembalikan node dengan elemen terbesar pada suatu subtree
-	  * Hint : Manfaatkan struktur dari binary search tree
-	  * @param node root dari subtree yang ingin dicari elemen terbesarnya
-	  * @return node dengan elemen terbesar dari subtree yang diinginkan
-	  *
-	*/
-	private Node<E> maxNode(Node<E> node){
-		Node<E> res = null;
-		if(node != null){
-			Node<E> current = node;
-			// TO DO : Lengkapi bagian ini
-		}
-		return res;
+	private Node<E> maxNode(Node<E> current, Node<E> prev){
+		if(current == null) return prev;
+		else return maxNode(current.right, current);
 	}
-
-	/**
-	  *
-	  * Mengetahui apakah sebuah objek sudah terdapat pada tree
-	  * Asumsikan jika elem.compareTo(otherElem) == 0, maka elem dan otherElem merupakan objek yang sama
-	  * Hint : Manfaatkan method find
-	  * @param elemen yang ingin diketahui keberadaannya dalam tree
-	  * @return true jika elemen ditemukan, false jika sebaliknya
-	  *
-	*/
 	public boolean contains(E elem){
-		// TO DO : Lengkapi method ini
-		return true;
+		if (root == null) return false;
+		Node<E> current = root;
+		boolean found = false;
+		while(current != null){
+			if (elem.compareTo(current.elem) < 0){
+				current = current.left;
+			} else if(elem.compareTo(current.elem) > 0){
+				current = current.right;
+			} else {
+				found = true;
+				break;
+			}
+		}
+		return found;
 	}
-
-	/**
-	  * Mengembalikan tree dalam bentuk pre-order
-	  * @return tree dalam bentuk pre-order sebagai list of E
-	*/
 	public List<E> preOrder(){
-		List<E> list = new LinkedList<>(); // default menggunakan LinkedList, silahkan menggunakan List yang sesuai dengan Anda
-		return preOrder(root,list);
-	}
-
-	/**
-	  *
-	  * Method helper dari preOrder()
-	  * @param node pointer
-	  * @param list sebagai akumulator
-	  * @return kumpulan elemen dari subtree yang rootnya adalah node parameter dengan urutan pre-order
-	  *
-	*/
-	private List<E> preOrder(Node<E> node, List<E> list){
-		// TO DO : Lengkapi method ini
+		if (root == null) return null;
+		List<E> list = new LinkedList<>();
+		preOrder(root, list);
 		return list;
 	}
+	private void preOrder(Node<E> current, List<E> list){
+		if (current != null){
+			list.add(current.elem);
+			preOrder(current.left, list);
+			preOrder(current.right, list);
+		}
+	}
 
-	/**
-	  * Mengembalikan tree dalam bentuk post-order
-	  * @return tree dalam bentuk post-order sebagai list of E
-	*/
 	public List<E> postOrder(){
-		List<E> list = new LinkedList<>(); // default menggunakan LinkedList, silahkan menggunakan List yang sesuai dengan Anda
-		return preOrder(root,list);
-	}
-
-	/**
-	  *
-	  * Method helper dari postOrder()
-	  * @param node pointer
-	  * @param list sebagai akumulator
-	  * @return kumpulan elemen dari subtree yang rootnya adalah node parameter dengan urutan post-order
-	  *
-	*/
-	private List<E> postOrder(Node<E> node, List<E> list){
-		// TO DO : Lengkapi method ini
+		if (root == null) return null;
+		List<E> list = new LinkedList<>();
+		postOrder(root, list);
 		return list;
 	}
+	private void postOrder(Node<E> current, List<E> list){
+		if (current != null){
+			postOrder(current.left, list);
+			postOrder(current.right, list);
+			list.add(current.elem);
+		}
+	}
 
-
-	/**
-	  * Mengembalikan tree dalam bentuk in-order secara ascending
-	  * @return tree dalam bentuk in-order secara ascending sebagai list of E
-	*/
 	public List<E> inOrderAscending(){
-		List<E> list = new LinkedList<>(); // default menggunakan LinkedList, silahkan menggunakan List yang sesuai dengan Anda
-		return preOrder(root,list);
-	}
-
-	/**
-	  *
-	  * Method helper dari inOrderAscending()
-	  * @param node pointer
-	  * @param list sebagai akumulator
-	  * @return kumpulan elemen dari subtree yang rootnya adalah node parameter dengan urutan in-order secara ascending
-	  *
-	*/
-	private List<E> inOrderAscending(Node<E> node, List<E> list){
-		// TO DO : Lengkapi method ini
+		if (root == null) return null;
+		List<E> list = new LinkedList<>();
+		inOrderAscending(root, list);
 		return list;
 	}
+	private void inOrderAscending(Node<E> current, List<E> list){
+		if (current != null){
+			inOrderAscending(current.left, list);
+			list.add(current.elem);
+			inOrderAscending(current.right, list);
+		}
+	}
 
-
-	/**
-	  * Mengembalikan tree dalam bentuk in-order secara descending
-	  * @return tree dalam bentuk in-order secara descending sebagai list of E
-	*/
 	public List<E> inOrderDescending(){
-		List<E> list = new LinkedList<>(); // default menggunakan LinkedList, silahkan menggunakan List yang sesuai dengan Anda
-		return preOrder(root,list);
+		if (root == null) return null;
+		List<E> list = new LinkedList<>();
+		inOrderDescending(root, list);
+		return list;
+	}
+	private void inOrderDescending(Node<E> current, List<E> list){
+		if (current != null){
+			inOrderDescending(current.right, list);
+			list.add(current.elem);
+			inOrderDescending(current.left, list);
+		}
 	}
 
-	/**
-	  *
-	  * Method helper dari inOrderDescending()
-	  * @param node pointer
-	  * @param list sebagai akumulator
-	  * @return kumpulan elemen dari subtree yang rootnya adalah node parameter dengan urutan in-order descending
-	  *
-	*/
-	private List<E> inOrderDescending(Node<E> node, List<E> list){
-		// TO DO : Lengkapi method ini
-		return list;
+	private static class Node<E> {
+		E elem;
+		Node<E> left, right;
+
+		public Node(E elem, Node<E> left, Node<E> right) {
+			this.elem = elem;
+			this.left = left;
+			this.right = right;
+		}
 	}
 }
