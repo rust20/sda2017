@@ -1,0 +1,3 @@
+#!/bin/bash
+
+javac7 SDA16069176345T2.java && java7 SDA16069176345T2 < test1.in

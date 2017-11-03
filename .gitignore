@@ -1,3 +1,10 @@
 *.class
 *.classpath
 *.project
+*.res
+
+tugas2/tests/test3.in
+tugas2/tests/test3.out
+tugas2/Ragil.java
+tugas2/tcT2.py
+tugas2/output
