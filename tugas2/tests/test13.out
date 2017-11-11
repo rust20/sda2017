@@ -1,0 +1,32 @@
+1,107 RUN, kekuatan maksimal sejumlah: 0
+1,110 Pahlawan yang ikut:Gilgamesh,Hercules
+2,110 BATTLE, kekuatan: 9998, pahlawan: Gilgamesh,Hercules
+109,110 Pahlawan yang ikut:Stella,Cu
+110,110 BATTLE, kekuatan: 30097, pahlawan: Gilgamesh,Hercules,Stella,Cu
+49,59 BATTLE, kekuatan: 30097, pahlawan: Gilgamesh,Hercules,Stella,Cu
+63,54 BATTLE, kekuatan: 15047, pahlawan: Gilgamesh,Hercules,Stella,Cu
+1,5 Pahlawan yang ikut:Rigel,Raven
+3,2 Pahlawan yang ikut:Arturia Pendragon,Amakusha,Feget
+1,3 Pahlawan yang ikut:Queen Riana,Nazuna,Jyanu,Emiye,Hector
+2,1 BATTLE, kekuatan: 61998, pahlawan: Rigel,Raven,Gilgamesh,Hercules
+109,2 BATTLE, kekuatan: 25999, pahlawan: Rigel,Raven,Gilgamesh
+107,1 Pahlawan yang ikut:Kizuna
+110,1 BATTLE, kekuatan: 30000, pahlawan: Rigel
+Akhir petualangan Gudako
+Level Gudako: 7224
+Level pahlawan:
+Gilgamesh: 1749
+Hercules: 1748
+Stella: 1701
+Cu: 1701
+Rigel: 315
+Raven: 15
+Arturia Pendragon: 1
+Amakusha: 1
+Feget: 1
+Queen Riana: 1
+Nazuna: 1
+Jyanu: 1
+Emiye: 1
+Hector: 1
+Kizuna: 1

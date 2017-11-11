@@ -1,0 +1,32 @@
+1,107 RUN, kekuatan maksimal sejumlah: 0
+1,110 Pahlawan yang ikut:Rigel,Gilgamesh,Hercules
+2,110 BATTLE, kekuatan: 99996, pahlawan: Rigel,Gilgamesh,Hercules
+109,110 Pahlawan yang ikut:Feget,Cu
+110,110 BATTLE, kekuatan: 129993, pahlawan: Rigel,Gilgamesh,Hercules,Feget,Cu
+49,59 BATTLE, kekuatan: 129993, pahlawan: Rigel,Gilgamesh,Hercules,Feget,Cu
+63,54 BATTLE, kekuatan: 129993, pahlawan: Rigel,Gilgamesh,Hercules,Feget,Cu
+1,5 Pahlawan yang ikut:Raven
+3,2 Pahlawan yang ikut:Arturia Pendragon,Amakusha
+1,3 Pahlawan yang ikut:Queen Riana,Nazuna,Hector,Stella,Jyanu,Emiye
+2,1 BATTLE, kekuatan: 349977, pahlawan: Rigel,Raven,Gilgamesh,Hercules,Feget,Arturia Pendragon,Amakusha,Queen Riana,Nazuna,Hector,Stella,Jyanu,Emiye,Cu
+109,2 BATTLE, kekuatan: 349977, pahlawan: Rigel,Raven,Gilgamesh,Hercules,Feget,Arturia Pendragon,Amakusha,Queen Riana,Nazuna,Hector,Stella,Jyanu,Emiye,Cu
+107,1 Pahlawan yang ikut:Kizuna
+110,1 BATTLE, kekuatan: 359976, pahlawan: Rigel,Raven,Gilgamesh,Hercules,Feget,Arturia Pendragon,Amakusha,Queen Riana,Nazuna,Hector,Stella,Jyanu,Emiye,Cu,Kizuna
+Akhir petualangan Gudako
+Level Gudako: 13299
+Level pahlawan:
+Rigel: 2049
+Gilgamesh: 2049
+Hercules: 2049
+Feget: 2015
+Cu: 2015
+Raven: 315
+Arturia Pendragon: 315
+Amakusha: 315
+Queen Riana: 315
+Nazuna: 315
+Hector: 315
+Stella: 315
+Jyanu: 315
+Emiye: 315
+Kizuna: 301

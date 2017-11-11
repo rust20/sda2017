@@ -1,12 +1,21 @@
 #!/bin/bash
 
-time javac7 SDA1606917645T2.java && java7 SDA1606917645T2 < tests/test1.in > tests/test1.res
-diff tests/test1.res tests/test1.out
-time javac7 SDA1606917645T2.java && java7 SDA1606917645T2 < tests/test2.in > tests/test2.res
-diff tests/test2.res tests/test2.out
-python3.6 tcT2.py > tests/test3.in
-javac7 Ragil.java && java7 Ragil < tests/test3.in > tests/test3.out
-time javac7 SDA1606917645T2.java && java7 SDA1606917645T2 < tests/test3.in > tests/test3.res
-diff tests/test3.res tests/test3.out
+python3.6 tests/tcT2.py > tests/test3.in
+javac7 tests/Ragil.java
+cd tests
+java7 "Ragil" < test3.in > test3.out
+cd ..
 
-rm *.class
+
+filetype=".java"
+
+for i in `seq 1 17`;
+do
+	echo "------------------------------" test$i
+	time javac7 $1
+	echo "------------------------------"
+	time java7 ${1%$filetype} < tests/test$i.in > tests/test$i.res
+	diff tests/test$i.res tests/test$i.out
+done
+
+

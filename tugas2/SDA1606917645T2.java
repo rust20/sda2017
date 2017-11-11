@@ -10,12 +10,17 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Stack;
 
+/**
+ *
+ *
+ * @author
+ */
 public class SDA1606917645T2 {
 	static final int PAHLAWAN_MAX = 3000;
 	static final int SUMMON_MAX = 2500;
 	static final int DUNGEON_MAX = 2500;
 
-	public static void main (String[] args) throws IOException{
+	public static void main (String[] args) throws IOException, RuntimeException{
 		BufferedReader scan = new BufferedReader(new InputStreamReader(System.in));
 		PrintWriter print = new PrintWriter(new OutputStreamWriter(System.out));
 
@@ -163,6 +168,11 @@ class Hero implements Comparable<Hero>{
 }
 
 
+/**
+ *
+ *
+ * @author
+ */
 class Dungeon{
 	private int power;
 	private int level;
@@ -270,7 +280,7 @@ class World{
 		this.colStart = column;
 	}
 
-	public void startAdventure(PrintWriter print){
+	public void startAdventure(PrintWriter print) throws RuntimeException{
 
 		Stack<Integer> nextRow = new Stack<>();
 		Stack<Integer> nextCol = new Stack<>();
